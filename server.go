@@ -75,6 +75,9 @@ var Config struct {
 	cleanupEveryMinutes       uint64
 }
 
+var AllowedChars = "A-Za-z0-9-._@!(),"
+var cpro = true
+
 var Templates = make(map[string]*pongo2.Template)
 var TemplateSet *pongo2.TemplateSet
 var staticBox *rice.Box
@@ -173,6 +176,25 @@ func setup() *web.Mux {
 	timeStarted = time.Now()
 	timeStartedStr = strconv.FormatInt(timeStarted.Unix(), 10)
 
+	if cpro {
+		nameRe := regexp.MustCompile("^" + Config.sitePath + "f/" + "(?P<name>[" + AllowedChars + "/]+)$")
+		selifRe := regexp.MustCompile("^" + Config.sitePath + "d/" + "(?P<name>[" + AllowedChars + "/]+)$")
+
+		mux.Get(Config.sitePath, indexHandler)
+		mux.Post(Config.sitePath+"upload", uploadPostHandler)
+		mux.Post(Config.sitePath+"upload/", uploadPostHandler)
+		mux.Delete(nameRe, deleteHandler)
+		mux.Get(Config.sitePath+"static/*", staticHandler)
+		mux.Get(Config.sitePath+"favicon.ico", staticHandler)
+		mux.Get(Config.sitePath+"robots.txt", staticHandler)
+		mux.Get(nameRe, fileAccessHandler)
+		mux.Post(nameRe, fileAccessHandler)
+		mux.Get(selifRe, fileServeHandler)
+		mux.NotFound(notFoundHandler)
+
+		return mux
+	}
+
 	// Routing setup
 	nameRe := regexp.MustCompile("^" + Config.sitePath + `(?P<name>[a-z0-9-\.]+)$`)
 	selifRe := regexp.MustCompile("^" + Config.sitePath + Config.selifPath + `(?P<name>[a-z0-9-\.]+)$`)
@@ -250,7 +272,7 @@ func setup() *web.Mux {
 }
 
 func main() {
-	flag.StringVar(&Config.bind, "bind", "127.0.0.1:8080",
+	flag.StringVar(&Config.bind, "bind", "0.0.0.0:8080",
 		"host to bind to (default: 127.0.0.1:8080)")
 	flag.StringVar(&Config.filesDir, "filespath", "files/",
 		"path to files directory")
@@ -262,7 +284,7 @@ func main() {
 		"remove stdout output for each request")
 	flag.BoolVar(&Config.allowHotlink, "allowhotlink", false,
 		"Allow hotlinking of files")
-	flag.StringVar(&Config.siteName, "sitename", "",
+	flag.StringVar(&Config.siteName, "sitename", "uploader",
 		"name of the site")
 	flag.StringVar(&Config.siteURL, "siteurl", "",
 		"site base url (including trailing slash)")
@@ -317,7 +339,7 @@ func main() {
 	flag.Uint64Var(&Config.accessKeyCookieExpiry, "access-cookie-expiry", 0, "Expiration time for access key cookies in seconds (set 0 to use session cookies)")
 	flag.StringVar(&Config.customPagesDir, "custompagespath", "",
 		"path to directory containing .md files to render as custom pages")
-	flag.Uint64Var(&Config.cleanupEveryMinutes, "cleanup-every-minutes", 0,
+	flag.Uint64Var(&Config.cleanupEveryMinutes, "cleanup-every-minutes", 60,
 		"How often to clean up expired files in minutes (default is 0, which means files will be cleaned up as they are accessed)")
 
 	iniflags.Parse()

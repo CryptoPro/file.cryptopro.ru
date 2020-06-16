@@ -16,6 +16,14 @@ import (
 
 func fileServeHandler(c web.C, w http.ResponseWriter, r *http.Request) {
 	fileName := c.URLParams["name"]
+	s := strings.Split(fileName, "/")
+	if len(s) != 2 {
+		notFoundHandler(c, w, r)
+		return
+	}
+	fileName = s[1] + "." + s[0]
+	randomKey := s[0]
+	directURL := getSiteURL(r) + "f/" + randomKey + "/" + fileName
 
 	metadata, err := checkFile(fileName)
 	if err == backends.NotFoundErr {
@@ -41,7 +49,7 @@ func fileServeHandler(c web.C, w http.ResponseWriter, r *http.Request) {
 		u, _ := url.Parse(referer)
 		p, _ := url.Parse(getSiteURL(r))
 		if referer != "" && !sameOrigin(u, p) {
-			http.Redirect(w, r, Config.sitePath+fileName, 303)
+			http.Redirect(w, r, directURL, 303)
 			return
 		}
 	}

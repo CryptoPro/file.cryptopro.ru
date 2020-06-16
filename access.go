@@ -102,6 +102,12 @@ func fileAccessHandler(c web.C, w http.ResponseWriter, r *http.Request) {
 	}
 
 	fileName := c.URLParams["name"]
+	s := strings.Split(fileName, "/")
+	if len(s) != 2 {
+		notFoundHandler(c, w, r)
+		return
+	}
+	fileName = s[1] + "." + s[0]
 
 	metadata, err := checkFile(fileName)
 	if err == backends.NotFoundErr {

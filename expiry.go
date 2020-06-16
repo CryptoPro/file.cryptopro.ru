@@ -38,6 +38,26 @@ func listExpirationTimes() []ExpirationTime {
 	actualExpiryInList := false
 	var expiryList []ExpirationTime
 
+	if cpro {
+		defaultExpiryList = []uint64{5184000, 172800}
+
+		for _, expiryEntry := range defaultExpiryList {
+			if Config.maxExpiry == 0 || expiryEntry <= Config.maxExpiry {
+				if expiryEntry == Config.maxExpiry {
+					actualExpiryInList = true
+				}
+
+				duration := time.Duration(expiryEntry) * time.Second
+				expiryList = append(expiryList, ExpirationTime{
+					Seconds: expiryEntry,
+					Human:   humanize.RelTime(epoch, epoch.Add(duration), "", ""),
+				})
+			}
+		}
+
+		return expiryList
+	}
+
 	for _, expiryEntry := range defaultExpiryList {
 		if Config.maxExpiry == 0 || expiryEntry <= Config.maxExpiry {
 			if expiryEntry == Config.maxExpiry {

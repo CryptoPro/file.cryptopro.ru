@@ -21,6 +21,41 @@ import (
 const maxDisplayFileSizeBytes = 1024 * 512
 
 func fileDisplayHandler(c web.C, w http.ResponseWriter, r *http.Request, fileName string, metadata backends.Metadata) {
+	if cpro {
+		randomKey := fileName[len(fileName)-32:]
+		fileName = fileName[:len(fileName)-33]
+		directURL := "d/" + randomKey + "/" + fileName
+
+		tpl := Templates["display/file.html"]
+		err := renderTemplate(tpl, pongo2.Context{
+			"mime":     metadata.Mimetype,
+			"filename": fileName,
+			"download": directURL,
+			"size":     humanize.Bytes(uint64(metadata.Size)),
+			"expiry": humanize.CustomRelTime(time.Now(), metadata.Expiry, "", "", []humanize.RelTimeMagnitude{
+				{time.Second, "now", time.Second},
+				{2 * time.Second, "1 second %s", 1},
+				{time.Minute, "%d seconds %s", time.Second},
+				{2 * time.Minute, "1 minute %s", 1},
+				{time.Hour, "%d minutes %s", time.Minute},
+				{2 * time.Hour, "1 hour %s", 1},
+				{time.Hour * 96, "%d hours %s", time.Hour},
+				{time.Hour * 90000, "%d days %s", time.Hour * 24},
+			}),
+			"expirylist":  listExpirationTimes(),
+			"extra":       make(map[string]string),
+			"forcerandom": Config.forceRandomFilename,
+			"lines":       []string{},
+			"files":       metadata.ArchiveFiles,
+			"siteurl":     strings.TrimSuffix(getSiteURL(r), "/"),
+		}, r, w)
+
+		if err != nil {
+			oopsHandler(c, w, r, RespHTML, "")
+		}
+		return
+	}
+
 	var expiryHuman string
 	if metadata.Expiry != expiry.NeverExpire {
 		expiryHuman = humanize.RelTime(time.Now(), metadata.Expiry, "", "")

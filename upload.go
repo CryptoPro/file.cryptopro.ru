@@ -242,6 +242,26 @@ func processUpload(upReq UploadRequest) (upload Upload, err error) {
 		return upload, FileTooLargeError
 	}
 
+	if cpro {
+		reg, _ := regexp.Compile("[^" + AllowedChars + "]+")
+		upload.Filename = reg.ReplaceAllString(upReq.filename, "")
+		if len(upload.Filename) == 0 {
+			upload.Filename = "no.name"
+		}
+
+		fileExpiry := time.Now().Add(upReq.expiry)
+		upReq.deleteKey = uniuri.NewLen(32)
+		upload.Filename += "." + uniuri.NewLen(32)
+
+		header := []byte{}
+		upload.Metadata, err = storageBackend.Put(upload.Filename, io.MultiReader(bytes.NewReader(header), upReq.src), fileExpiry, upReq.deleteKey, upReq.accessKey)
+		if err != nil {
+			return upload, err
+		}
+
+		return
+	}
+
 	// Determine the appropriate filename
 	barename, extension := barePlusExt(upReq.filename)
 	randomize := false
@@ -343,6 +363,28 @@ func generateBarename() string {
 }
 
 func generateJSONresponse(upload Upload, r *http.Request) []byte {
+	if cpro {
+		fileName := upload.Filename
+		randomKey := fileName[len(fileName)-32:]
+		fileName = fileName[:len(fileName)-33]
+		directURLf := getSiteURL(r) + "f/" + randomKey + "/" + fileName
+		directURLd := getSiteURL(r) + "d/" + randomKey + "/" + fileName
+
+		js, _ := json.Marshal(map[string]string{
+			"url":        directURLf,
+			"direct_url": directURLd,
+			"filename":   upload.Filename,
+			"delete_key": upload.Metadata.DeleteKey,
+			"access_key": upload.Metadata.AccessKey,
+			"expiry":     strconv.FormatInt(upload.Metadata.Expiry.Unix(), 10),
+			"size":       strconv.FormatInt(upload.Metadata.Size, 10),
+			"mimetype":   upload.Metadata.Mimetype,
+			"sha256sum":  upload.Metadata.Sha256sum,
+		})
+
+		return js
+	}
+
 	js, _ := json.Marshal(map[string]string{
 		"url":        getSiteURL(r) + upload.Filename,
 		"direct_url": getSiteURL(r) + Config.selifPath + upload.Filename,

@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/andreimarcu/linx-server/backends"
 	"github.com/zenazn/goji/web"
@@ -12,6 +13,12 @@ func deleteHandler(c web.C, w http.ResponseWriter, r *http.Request) {
 	requestKey := r.Header.Get("Linx-Delete-Key")
 
 	filename := c.URLParams["name"]
+	s := strings.Split(filename, "/")
+	if len(s) != 2 {
+		notFoundHandler(c, w, r)
+		return
+	}
+	filename = s[1] + "." + s[0]
 
 	// Ensure that file exists and delete key is correct
 	metadata, err := storageBackend.Head(filename)

@@ -12,13 +12,8 @@
     </div>
 
     <div class="info-actions">
-        {% if expiry %}
-        <span>file expires in {{ expiry }}</span> |
-        {% endif %}
-        {% block infomore %}{% endblock %}
-        <span>{{ size }}</span> |
-        <a href="{{ filename }}/torrent" download>torrent</a> |
-        <a href="{{ sitepath }}{{ selifpath }}{{ filename }}" download>get</a>
+        <span>{{ size }}</span>
+        <span>({{ expiry }} left)</span>
     </div>
 
     {% block infoleft %}{% endblock %}

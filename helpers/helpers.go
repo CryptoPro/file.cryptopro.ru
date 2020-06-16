@@ -45,6 +45,12 @@ func GenerateMetadata(r io.Reader) (m backends.Metadata, err error) {
 	// Get the hex-encoded string version of the Hash checksum
 	m.Sha256sum = hex.EncodeToString(hasher.Sum(nil))
 
+	// binary only
+	if len(m.Sha256sum) != 0 {
+		m.Mimetype = "application/octet-stream"
+		return
+	}
+
 	// Use the bytes we extracted earlier and attempt to determine the file
 	// type
 	kind, err := filetype.Match(header)
