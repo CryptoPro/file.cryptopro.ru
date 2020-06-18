@@ -1,16 +1,39 @@
-{% extends "base.html" %}
-
-{% block main %}
-<div class="normal display-file">
-    <p class="center"><a href="{{ sitepath }}{{ download }}">{{ filename }}</a></p>
-
-{% if files|length > 0 %}
-<p>Contents of the archive:</p>
-<ul>
-	{% for file in files %}
-	<li>{{ file }}</li>
-	{% endfor %}
-</ul>
-{% endif %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>КриптоПро NGate | Трансфер файлов</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0055a2">
+    <link rel="stylesheet" href="{{ sitepath }}static/css/style.css">
+    <link href='{{ sitepath }}static/images/favicon.png' rel='icon' type='image/png'>
+</head>
+<body>
+<div id="main">
+    <div class="header">
+        <div id="header-wrapper">
+            <div class="header-itm"><img src="{{ sitepath }}static/images/logo_cryptopro_white.svg" style="height:3rem;"></div>
+            <div class="header-itm"><b>Временная ссылка</b><br>Сервис трансфера файлов</div>
+        </div>
+    </div>
+    <div id="main-content">
+        <div id="content">
+            <h2>Добро пожаловать!</h2>
+            <p style="text-align: center;">Похоже кто-то из <b>КриптоПро</b> поделился с вами этой ссылой, вы можете скачать прикреплённый файл <b>по
+                временной ссылке ниже</b>:</p>
+            <div style="border: 1px solid gray; text-align: center;"><p style="margin-top:20px; margin-bottom: 0; font-weight: 500; color: #0055a2"><a href="{{ sitepath }}{{ download }}">{{ filename }}</a> <span style="font-size: small; color:gray">{{ size }}</span></p>
+                <p style="font-size: small; color:gray; margin-top: 0; margin-bottom: 20px">(ссылка действительна в течение {{ expiry }})</p></div>
+        </div>
+    </div>
+    <div id="footer">
+        <div id="footer-img"></div>
+        <div id="footer-wrapper">
+            <div id="footer-row">
+                <b>Сервис трансфера файлов</b><br>
+                © ООО «КРИПТО-ПРО»
+            </div>
+        </div>
+    </div>
 </div>
-{% endblock %}
+</body>
+</html>

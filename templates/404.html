@@ -1,9 +1,39 @@
-{% extends "base.html" %}
-
-{% block title %}{{sitename}} - 404 Not Found{% endblock %}
-
-{% block content %}
-<div class="error-404">
-  <a href="{{ sitepath }}"><img src='{{ sitepath }}static/images/404.jpg'></a>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>КриптоПро NGate | Трансфер файлов</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0055a2">
+    <link rel="stylesheet" href="{{ sitepath }}static/css/style.css">
+    <link href='{{ sitepath }}static/images/favicon.png' rel='icon' type='image/png'>
+</head>
+<body>
+<div id="main">
+    <div class="header">
+        <div id="header-wrapper">
+            <div class="header-itm"><img src="{{ sitepath }}static/images/logo_cryptopro_white.svg" style="height:3rem;"></div>
+            <div class="header-itm"><b>Временная ссылка</b><br>Сервис трансфера файлов</div>
+        </div>
+    </div>
+    <div id="main-content">
+        <div id="content">
+            <h2>Недействительная ссылка!</h2>
+            <div style="text-align: center;">
+                <p><b>Ссылка устарела</b> или была передана с ошибкой, если прикреплённый файл вам нужен, попробуйте запросить его у исполнителя снова.</p>
+                <img src="{{ sitepath }}static/images/404.svg" style="width:128px">
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <div id="footer-img"></div>
+        <div id="footer-wrapper">
+            <div id="footer-row">
+                <b>Сервис трансфера файлов</b><br>
+                © ООО «КРИПТО-ПРО»
+            </div>
+        </div>
+    </div>
 </div>
-{% endblock %}
+</body>
+</html>

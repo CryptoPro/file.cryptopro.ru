@@ -38,7 +38,7 @@ Dropzone.options.dropzone = {
 
         var cancelAction = document.createElement("span");
         cancelAction.className = "cancel";
-        cancelAction.innerHTML = "Cancel";
+        cancelAction.innerHTML = "Отмена";
         cancelAction.addEventListener('click', function (ev) {
             this.removeFile(file);
         }.bind(this));
@@ -51,7 +51,7 @@ Dropzone.options.dropzone = {
 
         file.uploadElement = upload;
 
-        document.getElementById("uploads").appendChild(upload);
+        document.getElementById("uploads").prepend(upload);
     },
     uploadprogress: function (file, p, bytesSent) {
         p = parseInt(p);
@@ -71,13 +71,21 @@ Dropzone.options.dropzone = {
         var fileLabelLink = document.createElement("a");
         fileLabelLink.href = resp.url;
         fileLabelLink.target = "_blank";
-        fileLabelLink.innerHTML = resp.url;
+        fileLabelLink.innerHTML = resp.url.split("/").pop() + " (" + Math.ceil(parseInt(resp.size)/1024) + " kB )";
         file.fileLabel.innerHTML = "";
         file.fileLabelLink = fileLabelLink;
         file.fileLabel.appendChild(fileLabelLink);
 
+        localStorage.setItem(resp.url,JSON.stringify(resp));
+
+        var expiryLabel = document.createElement("span");
+        var expiryDate = new Date(parseInt(resp.expiry)*1000);
+        expiryLabel.innerHTML = " до " + expiryDate.toLocaleTimeString("ru-RU").split(":").slice(0,2).join(":") + " " + expiryDate.toLocaleDateString("ru-RU") + " ";
+        expiryLabel.className = "expiry";
+        file.fileActions.appendChild(expiryLabel);
+
         var deleteAction = document.createElement("span");
-        deleteAction.innerHTML = "Delete";
+        deleteAction.innerHTML = "Удалить";
         deleteAction.className = "cancel";
         deleteAction.addEventListener('click', function (ev) {
             xhr = new XMLHttpRequest();
@@ -85,10 +93,12 @@ Dropzone.options.dropzone = {
             xhr.setRequestHeader("Linx-Delete-Key", resp.delete_key);
             xhr.onreadystatechange = function (file) {
                 if (xhr.readyState == 4 && xhr.status === 200) {
-                    var text = document.createTextNode("Deleted ");
+                    var text = document.createTextNode("Удалён ");
                     file.fileLabel.insertBefore(text, file.fileLabelLink);
                     file.fileLabel.className = "deleted";
+                    file.fileActions.setAttribute("style","text-decoration: line-through");
                     file.fileActions.removeChild(file.cancelActionElement);
+                    localStorage.removeItem(resp.url);
                 }
             }.bind(this, file);
             xhr.send();
@@ -96,6 +106,7 @@ Dropzone.options.dropzone = {
         file.fileActions.removeChild(file.cancelActionElement);
         file.cancelActionElement = deleteAction;
         file.fileActions.appendChild(deleteAction);
+
     },
     canceled: function (file) {
         this.options.error(file);
@@ -139,8 +150,7 @@ document.onpaste = function (event) {
         }
     }
 };
-
-document.getElementById("access_key_checkbox").onchange = function (event) {
+/*document.getElementById("access_key_checkbox").onchange = function (event) {
     if (event.target.checked) {
         document.getElementById("access_key_input").style.display = "inline-block";
         document.getElementById("access_key_text").style.display = "none";
@@ -149,6 +159,6 @@ document.getElementById("access_key_checkbox").onchange = function (event) {
         document.getElementById("access_key_input").style.display = "none";
         document.getElementById("access_key_text").style.display = "inline-block";
     }
-};
+}*/
 
 // @end-license

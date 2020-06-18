@@ -1,40 +1,89 @@
-{% extends "base.html" %}
-
-{% block head %}
-<link href='{{ sitepath }}static/css/dropzone.css' media='screen, projection' rel='stylesheet' type='text/css'>
-{% endblock %}
-
-{% block content %}
-<div id="fileupload">
-    <form action="{{ sitepath }}upload" class="dropzone" id="dropzone" method="POST" enctype="multipart/form-data"
-        data-maxsize="{{ maxsize }}" data-auth="{{ auth }}">
-        <div class="fallback">
-            <input id="fileinput" name="file" type="file" /><br />
-            <input id="submitbtn" type="submit" value="Upload">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>КриптоПро NGate | Трансфер файлов</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0055a2">
+    <link rel="stylesheet" href="{{ sitepath }}static/css/style.css">
+    <link href='{{ sitepath }}static/images/favicon.png' rel='icon' type='image/png'>
+    <link href='{{ sitepath }}static/css/linx.css' rel='stylesheet' type='text/css'>
+    <link href='{{ sitepath }}static/css/hint.css' rel='stylesheet' type='text/css'>
+    <link href='{{ sitepath }}static/css/dropzone.css' media='screen, projection' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div id="main">
+    <div class="header">
+        <div id="header-wrapper">
+            <div class="header-itm"><img src="{{ sitepath }}static/images/logo_cryptopro_white.svg" style="height:3rem;"></div>
+            <div class="header-itm"><b>Временная ссылка</b><br>Сервис трансфера файлов</div>
         </div>
+    </div>
+    <div id="main-content">
+        <div id="content">
+            <div id="container_container">
+                <div id="container">
+                    <div id="linx_header">
+                        <div id="navigation" class="center">
+                        </div>
+                        <h2 class="center">
+                            Трансфер файлов
+                        </h2>
+                    </div>
 
-        <div id="dzone" class="dz-default dz-message">
-            <span>Click or Drop file(s) or Paste image</span>
-        </div>
+                    <div id="fileupload">
+                        <form action="{{ sitepath }}upload" class="dropzone" id="dropzone" method="POST"
+                              enctype="multipart/form-data"
+                              data-maxsize="{{ maxsize }}" data-auth="none">
+                            <div class="fallback">
+                                <input id="fileinput" name="file" type="file"/><br/>
+                                <input id="submitbtn" type="submit" value="Upload">
+                            </div>
 
-        <div id="choices">
-            <div id="expiry">
-                <label>Expiry:
-                    <select name="expires" id="expires">
-                        {% for expiry in expirylist %}
-                        <option value="{{ expiry.Seconds }}" {% if forloop.Last %} selected{% endif %}>
-                            {{ expiry.Human }}</option>
-                        {% endfor %}
-                    </select>
-                </label>
+                            <div id="dzone" class="dz-default dz-message">
+                                <img src="{{ sitepath }}static/images/upload.svg" style="width:40%"><br>
+                                <span>Поместите файл в область <br>или вставьте изображение</span>
+                            </div>
+
+                            <div id="choices">
+                                <div id="expiry">
+                                    <label>Хранение:
+                                        <select name="expires" id="expires">
+                                            <option value="172800" selected>
+                                                2 дня
+                                            </option>
+                                            <option value="1209600">
+                                                2 недели
+                                            </option>
+                                            <option value="5184000">
+                                                2 месяца
+                                            </option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="clear"></div>
+                        </form>
+                        <div id="uploads"></div>
+                        <div class="clear"></div>
+                    </div>
+
+                    <script src="{{ sitepath }}static/js/dropzone.js"></script>
+                    <script src="{{ sitepath }}static/js/upload.js"></script>
+                    <script src="{{ sitepath }}static/js/storage.js"></script>
+                </div>
             </div>
         </div>
-        <div class="clear"></div>
-    </form>
-    <div id="uploads"></div>
-    <div class="clear"></div>
+    </div>
+    <div id="footer">
+        <div id="footer-img"></div>
+        <div id="footer-wrapper">
+            <div id="footer-row">
+                <b>Сервис трансфера файлов</b><br>
+                © ООО «КРИПТО-ПРО»
+            </div>
+        </div>
+    </div>
 </div>
-
-<script src="{{ sitepath }}static/js/dropzone.js"></script>
-<script src="{{ sitepath }}static/js/upload.js"></script>
-{% endblock %}
+</body>
+</html>

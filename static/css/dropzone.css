@@ -48,22 +48,23 @@
 }
 
 div.dz-default {
-    border: 2px dashed #C9C9C9;
+    border: 1px dotted #777777;
     border-radius: 5px;
-    color: #C9C9C9;
-    font: 14px "helvetica neue",helvetica,arial,sans-serif;
-    background-color: #FAFBFC;
+    color: #777777;
+    font-size: 14px;
+    background: #FFF;
 	padding-top: 60px;
 	padding-bottom: 60px;
 	text-align: center;
+    cursor: pointer;
 }
 
 div.dz-default:hover {
-	background-color: #eff4f8;
+    background-color: #f0fffb;
 }
 
 div.upload {
-	background-color: #E2E2E2;
+	background-color: #e6eff8;
 	border: 1px solid #C9C9C9;
 	margin-bottom: 5px;
 	padding: 5px;
@@ -76,19 +77,19 @@ div.upload {
 .upload a {
 	font-size: 12px;
     text-decoration: none;
-    border-bottom: 1px dotted #556A7F;
+    border-bottom: 1px dotted #002b51;
     font-weight: 600;
-    color: #556A7F;
+    color: #002b51;
 }
 
 .upload a:hover {
-    border-bottom: 1px dotted #556A7F;
-    color: #556A7F;
+    border-bottom: 1px dotted #002b51;
+    color: #002b51;
 }
 
 .upload .deleted,
 .upload .error {
-    color: #E68181;
+    color: #FF1635;
 }
 
 .upload .right {
@@ -98,12 +99,16 @@ div.upload {
 
 .cancel {
 	margin-right: 5px;
-	font-size: 10px;
-    border-bottom: 1px dotted #556A7F;	
-    color: #E68181;
+	font-size: 12px;
+    border-bottom: 1px dotted #002b51;
+    color: #ff8b9a;
     cursor: pointer;
 }
 
+.expiry {
+    color: #8c89e1;
+}
+
 .dz-drag-hover div.dz-default {
-    background-color: #2c89f0;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAHCAYAAADEUlfTAAAAMUlEQVQYV2NkwAESqm/7MmKTA0ksaFXdjCEJkwBpQpFElkCRRJeAS2KTAEvikgBJAgCPxBoLx7CKYQAAAABJRU5ErkJggg==) repeat #FFF;
 }
