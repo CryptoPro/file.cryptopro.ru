@@ -292,7 +292,7 @@ func main() {
 		"path relative to site base url where files are accessed directly")
 	flag.Int64Var(&Config.maxSize, "maxsize", 4*1024*1024*1024,
 		"maximum upload file size in bytes (default 4GB)")
-	flag.Uint64Var(&Config.maxExpiry, "maxexpiry", 0,
+	flag.Uint64Var(&Config.maxExpiry, "maxexpiry", 5184000,
 		"maximum expiration time in seconds (default is 0, which is no expiry)")
 	flag.StringVar(&Config.certFile, "certfile", "",
 		"path to ssl certificate (for https)")
