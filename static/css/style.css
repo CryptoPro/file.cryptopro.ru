@@ -25,12 +25,12 @@ body {
     z-index: 3;  
 }
 .header-wrapper
-{           
+{
     display: flex;
     justify-content: space-between;
-    align-items: center;    
-    flex-flow: row wrap;    
-    max-width: 37rem;  
+    align-items: center;
+    flex-flow: row wrap;
+    max-width: 37rem;
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
@@ -90,7 +90,14 @@ body {
     overflow: hidden;
 }
 #content
-{           
+{
+    padding: 1rem;
+    max-width: 33rem;
+    margin: 0 auto;
+    margin-bottom: 7rem;
+}
+#contentup
+{
     width:100%;
     max-width: 33rem;
     margin: 0 auto;

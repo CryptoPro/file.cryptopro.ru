@@ -39,7 +39,7 @@
 #fileupload {
     display: flex;
     flex-direction: column;
-    padding-top: 40px;
+    padding: 1rem;
 }
 
 #uploads {
