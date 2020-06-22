@@ -92,7 +92,7 @@ Dropzone.options.dropzone = {
             xhr.open("DELETE", resp.url, true);
             xhr.setRequestHeader("Linx-Delete-Key", resp.delete_key);
             xhr.onreadystatechange = function (file) {
-                if (xhr.readyState == 4 && xhr.status === 200) {
+                if (xhr.readyState == 4 && (xhr.status === 200 || xhr.status === 404)) {
                     var text = document.createTextNode("Удалён ");
                     file.fileLabel.insertBefore(text, file.fileLabelLink);
                     file.fileLabel.className = "deleted";

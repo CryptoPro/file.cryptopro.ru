@@ -41,7 +41,7 @@ for (let localStorageKey in localStorage) {
         xhr.open("DELETE", resp.url, true);
         xhr.setRequestHeader("Linx-Delete-Key", resp.delete_key);
         xhr.onreadystatechange = function (fileLabel, fileLabelLink, deleteAction, expiryLabel, resp) {
-            if (xhr.readyState == 4 && xhr.status === 200) {
+            if (xhr.readyState == 4 && (xhr.status === 200 || xhr.status === 404)) {
                 let text = document.createTextNode("Удалён ");
                 fileLabel.insertBefore(text, fileLabelLink);
                 fileLabel.className = "deleted";

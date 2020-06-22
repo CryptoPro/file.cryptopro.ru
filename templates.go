@@ -49,6 +49,7 @@ func populateTemplatesMap(tSet *pongo2.TemplateSet, tMap map[string]*pongo2.Temp
 		"API.html",
 		"400.html",
 		"401.html",
+		"403.html",
 		"404.html",
 		"oops.html",
 		"access.html",

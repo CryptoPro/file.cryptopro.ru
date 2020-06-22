@@ -190,6 +190,7 @@ func setup() *web.Mux {
 		mux.Get(nameRe, fileAccessHandler)
 		mux.Post(nameRe, fileAccessHandler)
 		mux.Get(selifRe, fileServeHandler)
+		mux.Get(Config.sitePath+"403/*", http403Handler)
 		mux.NotFound(notFoundHandler)
 
 		return mux

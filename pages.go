@@ -73,6 +73,14 @@ func notFoundHandler(c web.C, w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func http403Handler(c web.C, w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(403)
+	err := renderTemplate(Templates["403.html"], pongo2.Context{}, r, w)
+	if err != nil {
+		oopsHandler(c, w, r, RespHTML, "")
+	}
+}
+
 func oopsHandler(c web.C, w http.ResponseWriter, r *http.Request, rt RespType, msg string) {
 	if msg == "" {
 		msg = "Oops! Something went wrong..."

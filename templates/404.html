@@ -1,21 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>КриптоПро | Файлообменный сервис</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0055a2">
-    <link rel="stylesheet" href="{{ sitepath }}static/css/style.css">
-    <link href='{{ sitepath }}static/images/favicon.png' rel='icon' type='image/png'>
-</head>
-<body>
-<div id="main">
-    <div class="header">
-        <div class="header-wrapper">
-            <div class="header-itm"><a href="/"><img src="{{ sitepath }}static/images/logo_cryptopro_white.svg" style="height:3rem;"></a></div>
-            <div class="header-itm"><b>Временная ссылка</b><br>Файлообменный сервис</div>
-        </div>
-    </div>
+{% extends "cpro.html" %}
+{% block content %}
     <div id="main-content">
         <div id="content">
             <h2>Недействительная ссылка!</h2>
@@ -25,15 +9,4 @@
             </div>
         </div>
     </div>
-    <div id="footer">
-        <div id="footer-img"></div>
-        <div id="footer-wrapper">
-            <div id="footer-row">
-                <b>Файлообменный сервис</b><br>
-                © ООО «КРИПТО-ПРО»
-            </div>
-        </div>
-    </div>
-</div>
-</body>
-</html>
+{% endblock %}
