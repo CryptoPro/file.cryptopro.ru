@@ -16,23 +16,15 @@ body {
     flex-direction: column;
     justify-content: space-between;
 }
-#header
-{       
-    background: url("../images/blue-pattern.jpg") repeat;
-    display: block; 
-    text-align:center;
-    box-shadow: 0px 2px 7px 2px rgba(0,0,0,0.2);
-    border-bottom: 1px solid #e8e8e8;
-}
 
-/*Реализация header через header-wrapper*/
 .header
 {
     background: url("../images/blue-pattern.jpg") repeat;
     box-shadow: 0px 2px 7px 2px rgba(0,0,0,0.2);
-    border-bottom: 1px solid #e8e8e8;     
+    border-bottom: 1px solid #e8e8e8;   
+    z-index: 3;  
 }
-#header-wrapper
+.header-wrapper
 {           
     display: flex;
     justify-content: space-between;
@@ -54,7 +46,7 @@ body {
 }
 /* меньше 500px */
 @media all and (max-width: 500px) {
-	#header-wrapper { flex-direction: column; }
+	.header-wrapper { flex-direction: column; }
         .header-itm { text-align: center; }
         .header-itm:nth-child(1) { margin: 1rem 0 0 0; }
         .header-itm:nth-child(2) { margin: 0.5rem 0 1rem 0; }
@@ -99,10 +91,9 @@ body {
 }
 #content
 {           
-    display: block;
-    margin:0 auto;
-    background: rgba(255, 255, 255, 0.8);
+    width:100%;
     max-width: 33rem;
+    margin: 0 auto;
     margin-bottom: 7rem;
 }
 #content h2

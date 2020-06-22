@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>КриптоПро NGate | Трансфер файлов</title>
+    <title>КриптоПро | Файлообменный сервис</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0055a2">
@@ -11,9 +11,9 @@
 <body>
 <div id="main">
     <div class="header">
-        <div id="header-wrapper">
-            <div class="header-itm"><img src="{{ sitepath }}static/images/logo_cryptopro_white.svg" style="height:3rem;"></div>
-            <div class="header-itm"><b>Временная ссылка</b><br>Сервис трансфера файлов</div>
+        <div class="header-wrapper">
+            <div class="header-itm"><a href="/"><img src="{{ sitepath }}static/images/logo_cryptopro_white.svg" style="height:3rem;"></a></div>
+            <div class="header-itm"><b>Временная ссылка</b><br>Файлообменный сервис</div>
         </div>
     </div>
     <div id="main-content">
@@ -21,7 +21,11 @@
             <h2>Добро пожаловать!</h2>
             <p style="text-align: center;">Похоже кто-то из <b>КриптоПро</b> поделился с вами этой ссылой, вы можете скачать прикреплённый файл <b>по
                 временной ссылке ниже</b>:</p>
-            <div style="border: 1px solid gray; text-align: center;"><p style="margin-top:20px; margin-bottom: 0; font-weight: 500; color: #0055a2"><a href="{{ sitepath }}{{ download }}">{{ filename }}</a> <span style="font-size: small; color:gray">{{ size }}</span></p>
+            <div style="background: #e6eff8; border: 1px solid #C9C9C9; text-align: center; overflow-wrap: anywhere; padding: 0 10px;">
+                <p style="margin-top:20px; margin-bottom: 0; padding-bottom: 5px; font-weight: 500;">
+                    <a style="color: #0055a2; text-decoration: none; border-bottom: 1px dotted #002b51;" href="{{ sitepath }}{{ download }}">{{ filename }}</a> 
+                    <span style="font-size: small; color:firebrick">{{ size }}</span>
+                </p>
                 <p style="font-size: small; color:gray; margin-top: 0; margin-bottom: 20px">(ссылка действительна в течение {{ expiry }})</p></div>
         </div>
     </div>
@@ -29,7 +33,7 @@
         <div id="footer-img"></div>
         <div id="footer-wrapper">
             <div id="footer-row">
-                <b>Сервис трансфера файлов</b><br>
+                <b>Файлообменный сервис</b><br>
                 © ООО «КРИПТО-ПРО»
             </div>
         </div>

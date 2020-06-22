@@ -32,22 +32,25 @@
 }
 
 #dropzone {
-    width: 400px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 100%;
+    margin: 0 auto;
 }
 
-@media(max-width: 450px) {
-  #dropzone {
-      width: auto;
-  }
+#fileupload {
+    display: flex;
+    flex-direction: column;
+    padding-top: 40px;
 }
 
 #uploads {
     margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 div.dz-default {
+    max-width: 33rem;
+    margin: 0 auto;
     border: 1px dotted #777777;
     border-radius: 5px;
     color: #777777;
@@ -58,17 +61,33 @@ div.dz-default {
 	text-align: center;
     cursor: pointer;
 }
+@media(max-width: 500px) {
+    div.dz-default {
+        max-width: 20rem;
+    }
+  }
 
 div.dz-default:hover {
     background-color: #f0fffb;
 }
 
 div.upload {
+    flex: 0 1 33rem;
 	background-color: #e6eff8;
 	border: 1px solid #C9C9C9;
 	margin-bottom: 5px;
-	padding: 5px;
+    padding: 5px;
+    overflow-wrap: anywhere;
 }
+@media(max-width: 500px) {
+    div.upload {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 2.3rem;
+        justify-content: space-between;
+    }
+  }
 
 .upload {
 	font-size: 12px;

@@ -71,7 +71,7 @@ Dropzone.options.dropzone = {
         var fileLabelLink = document.createElement("a");
         fileLabelLink.href = resp.url;
         fileLabelLink.target = "_blank";
-        fileLabelLink.innerHTML = resp.url.split("/").pop() + " (" + Math.ceil(parseInt(resp.size)/1024) + " kB )";
+        fileLabelLink.innerHTML = resp.url.split("/").pop() + " <span style='color:firebrick'>" + Math.ceil(parseInt(resp.size)/1024) + " kB</span>";
         file.fileLabel.innerHTML = "";
         file.fileLabelLink = fileLabelLink;
         file.fileLabel.appendChild(fileLabelLink);
@@ -97,6 +97,7 @@ Dropzone.options.dropzone = {
                     file.fileLabel.insertBefore(text, file.fileLabelLink);
                     file.fileLabel.className = "deleted";
                     file.fileActions.setAttribute("style","text-decoration: line-through");
+                    file.fileLabel.parentNode.setAttribute("style","background-color: #f8e6e6");
                     file.fileActions.removeChild(file.cancelActionElement);
                     localStorage.removeItem(resp.url);
                 }

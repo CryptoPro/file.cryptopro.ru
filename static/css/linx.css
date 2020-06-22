@@ -8,17 +8,15 @@ body {
 }
 */
 
+
 #container_container {
-  display: table;
-  table-layout: fixed;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
+  max-width: 33rem;
 }
 
-#container {
-  display: table-cell;
-  min-width: 200px;
-}
+/* #container {
+
+} */
 
 #linx_header a {
   text-decoration: none;
@@ -257,9 +255,14 @@ body {
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 100%;
-  margin-top: 5px;
+  max-width: 33rem;
+  margin: 5px auto 0 auto;
   font-size: 13px;
+}
+@media(max-width: 500px) {
+  #choices {
+      max-width: 20rem;
+  }
 }
 
 #expiry {

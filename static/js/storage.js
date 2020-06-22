@@ -21,7 +21,7 @@ for (let localStorageKey in localStorage) {
     let fileLabelLink = document.createElement("a");
     fileLabelLink.href = resp.url;
     fileLabelLink.target = "_blank";
-    fileLabelLink.innerHTML = resp.url.split("/").pop() + " (" + Math.ceil(parseInt(resp.size)/1024) + " kB )";;
+    fileLabelLink.innerHTML = resp.url.split("/").pop() + " <span style='color:firebrick'>" + Math.ceil(parseInt(resp.size)/1024) + " kB</span>";
 
     fileLabel.appendChild(fileLabelLink);
     upload.appendChild(fileLabel);
@@ -46,6 +46,7 @@ for (let localStorageKey in localStorage) {
                 fileLabel.insertBefore(text, fileLabelLink);
                 fileLabel.className = "deleted";
                 expiryLabel.setAttribute("style","text-decoration: line-through");
+                fileLabel.parentNode.style.backgroundColor = "#f8e6e6";
                 fileActions.removeChild(deleteAction);
                 localStorage.removeItem(resp.url);
             }
