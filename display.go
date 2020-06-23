@@ -31,7 +31,7 @@ func fileDisplayHandler(c web.C, w http.ResponseWriter, r *http.Request, fileNam
 			"mime":     metadata.Mimetype,
 			"filename": fileName,
 			"download": directURL,
-			"size":     humanize.Bytes(uint64(metadata.Size)),
+			"size":     humanize.IBytes(uint64(metadata.Size)),
 			"expiry": humanize.CustomRelTime(time.Now(), metadata.Expiry, "", "", []humanize.RelTimeMagnitude{
 				{2 * time.Minute, "1 минуты", 1},
 				{time.Hour, "%d минут", time.Minute},
