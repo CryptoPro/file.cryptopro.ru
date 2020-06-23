@@ -118,6 +118,15 @@ func uploadPostHandler(c web.C, w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
+		if cpro {
+			fileName := upload.Filename
+			randomKey := fileName[len(fileName)-32:]
+			fileName = fileName[:len(fileName)-33]
+			directURLf := getSiteURL(r) + "f/" + randomKey + "/" + fileName
+			http.Redirect(w, r, directURLf, 303)
+			return
+		}
+
 		http.Redirect(w, r, Config.sitePath+upload.Filename, 303)
 	}
 }
