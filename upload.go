@@ -241,6 +241,9 @@ func processUpload(upReq UploadRequest) (upload Upload, err error) {
 	if upReq.size > Config.maxSize {
 		return upload, FileTooLargeError
 	}
+	if upReq.size == 0 {
+		return upload, backends.FileEmptyError
+	}
 
 	if cpro {
 		reg, _ := regexp.Compile("[^" + AllowedChars + "]+")
