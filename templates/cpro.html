@@ -5,28 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0055a2">
-    <link rel="stylesheet" href="{{ sitepath }}static/css/style.css">
+    <link rel="stylesheet" href="{{ sitepath }}static/css/cp-template.min.css">
     <link href='{{ sitepath }}static/images/favicon.png' rel='icon' type='image/png'>
     {% block head %}{% endblock %}
 </head>
+
 <body>
-<div id="main">
-    <div class="header">
-        <div class="header-wrapper">
-            <div class="header-itm"><a href="/"><img src="{{ sitepath }}static/images/logo_cryptopro_white.svg" style="height:50px;width:150px;"></a></div>
-            <div class="header-itm"><b>Временная ссылка</b><br>Файлообменный сервис</div>
-        </div>
-    </div>
-    {% block content %}{% endblock %}
-    <div id="footer">
-        <div id="footer-img"></div>
-        <div id="footer-wrapper">
-            <div id="footer-row">
-                <b>Файлообменный сервис</b><br>
-                <span style="display:inline-block;transform:scale(-1, 1);">©</span> ООО «КРИПТО-ПРО»
-            </div>
-        </div>
-    </div>
-</div>
+	<div class="cp-wrapper">
+		<header class="cp-header">
+			<div class="cp-container">
+				<div class="cp-header__row">
+					<div class="cp-header__item cp-header__item_left">
+						<a href="/">
+							<img src="{{ sitepath }}static/images/logo_cryptopro_white.svg" style="height:50px; width:150px">
+						</a>
+					</div>
+					<div class="cp-header__item cp-header__item_right">
+						<b>Временная ссылка</b>
+						<br>
+						Файлообменный сервис
+					</div>
+				</div>
+			</div>
+		</header>
+		
+			{% block content %}{% endblock %}
+
+		<footer class="cp-footer">
+			<div class="cp-footer__img"></div>
+			<div class="cp-footer__row">
+				<p>
+                    <b>Файлообменный сервис</b>
+				    <br>
+                    <span style="display:inline-block;transform:scale(-1, 1);">©</span> ООО «КРИПТО-ПРО»
+                </p>
+			</div>
+		</footer>
+	</div>
 </body>
 </html>

@@ -1,16 +1,17 @@
 {% extends "cpro.html" %}
 {% block head %}
-    <link href='{{ sitepath }}static/css/linx.css' rel='stylesheet' type='text/css'>
-    <link href='{{ sitepath }}static/css/hint.css' rel='stylesheet' type='text/css'>
-    <link href='{{ sitepath }}static/css/dropzone.css' media='screen, projection' rel='stylesheet' type='text/css'>
+    <link href='{{ sitepath }}static/css/style.min.css' rel='stylesheet' type='text/css'>
 {% endblock %}
 {% block content %}
-    <div id="main-content">
-        <div id="fileupload">
-            <form action="{{ sitepath }}upload" class="dropzone" id="dropzone" method="POST"
-                  enctype="multipart/form-data"
-                  data-maxsize="{{ maxsize }}" data-auth="none">
+<main class="cp-main cp-main_screen">
+<div id="fileupload">
+    <div class="cp-container cp-container_fullwidth">
+        <form action="{{ sitepath }}upload" class="dropzone" id="dropzone" method="POST"
+              enctype="multipart/form-data"
+              data-maxsize="{{ maxsize }}" data-auth="none">
+            <div class="cp-container cp-container_pt">
                 <div class="fallback">
+                    <p>Ваш браузер устарел и не поддерживает современные стандарты, страница отображается в ограниченном режиме</p>
                     <input id="fileinput" name="file" type="file"/><br/>
                     <input id="submitbtn" type="submit" value="Загрузить">
                 </div>
@@ -22,7 +23,7 @@
                     <div id="expiry">
                         <label>Хранение:
                             <select name="expires" id="expires">
-                                <option value="172800" selected>
+                                <option value="172800" selected="">
                                     2 дня
                                 </option>
                                 <option value="1209600">
@@ -35,18 +36,15 @@
                         </label>
                     </div>
                 </div>
-                <div class="clear"></div>
-            </form>
-            <div id="contentup">
-                <div id="container_container">
-                    <div id="container">
-                        <div id="uploads"></div>
-                        <div class="clear"></div>
-                        <script src="{{ sitepath }}static/js/dropzone.js"></script>
-                        <script src="{{ sitepath }}static/js/upload.js"></script>
-                        <script src="{{ sitepath }}static/js/storage.js"></script>
-                    </div>
-                </div>
             </div>
-        </div>
+        </form>
+    </div>
+    <div class="cp-container cp-container_pb">
+        <div id="uploads"></div>
+    </div>
+</div>
+<script src="{{ sitepath }}static/js/dropzone.js"></script>
+<script src="{{ sitepath }}static/js/upload.js"></script>
+<script src="{{ sitepath }}static/js/storage.js"></script>
+</main>
 {% endblock %}

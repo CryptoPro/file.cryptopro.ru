@@ -1,12 +1,13 @@
 {% extends "cpro.html" %}
 {% block content %}
-    <div id="main-content">
-        <div id="content">
-            <h2>Недействительная ссылка!</h2>
-            <div style="text-align: center;">
-                <p><b>Ссылка устарела</b> или была передана с&nbsp;ошибкой.<br> Если прикреплённый ранее файл вам нужен,<br> попробуйте запросить его у&nbsp;исполнителя снова.</p>
-                <img src="{{ sitepath }}static/images/404.svg" style="width:128p;height:128px;">
-            </div>
+<main class="cp-main cp-main_screen cp-main_center">
+    <div class="cp-container cp-container_pt cp-container_pb">
+        <h2 style="text-align: center;">Недействительная ссылка!</h2>
+        <div style="text-align: center;">
+            <p><b>Ссылка устарела</b> или была передана с&nbsp;ошибкой.<br> Если прикреплённый ранее файл вам нужен,<br> попробуйте запросить его снова.</p>
+            <br>
+            <img src="{{ sitepath }}static/images/404.svg" style="width:128p;height:128px; margin: 0 auto">
         </div>
     </div>
+</main>
 {% endblock %}
