@@ -154,6 +154,7 @@ func (b LocalfsBackend) Put(key string, r io.Reader, expiry time.Time, deleteKey
 	m.DeleteKey = deleteKey
 	m.AccessKey = accessKey
 	m.ArchiveFiles, _ = helpers.ListArchiveFiles(m.Mimetype, m.Size, dst)
+	m.Size = bytes
 
 	err = b.writeMetadata(key, m)
 	if err != nil {

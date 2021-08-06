@@ -12,6 +12,13 @@ import (
 )
 
 func GenerateMetadata(r io.Reader) (m backends.Metadata, err error) {
+	// binary only no hash
+	if r != nil {
+		m.Mimetype = "application/octet-stream"
+		m.Sha256sum = "1234567812345678123456781234567812345678123456781234567812345678"
+		return
+	}
+
 	// Since we don't have the ability to seek within a file, we can use a
 	// Buffer in combination with a TeeReader to keep a copy of the bytes
 	// we read when detecting the file type. These bytes are still needed
